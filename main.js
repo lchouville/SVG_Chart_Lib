@@ -1,6 +1,8 @@
 // Import the svg_ProgressBar function
 import { svg_Progressbar_s } from './graph/bar/progressBar.js'; // Replace './your/svg_progress_bar_module.js' with the actual path to your module
 import { svg_stackedbar100_s } from './graph/bar/stackedBar.js';
+import { svg_ProgressCircle_s } from './graph/circle/progressCircle.js';
+import { svg_StackedCircle_s } from './graph/circle/stackedCircle.js';
 // Define options for the progress bar
 const options1 = {
     bar_width: 200,
@@ -49,3 +51,40 @@ let stackedbar;
 
 document.body.appendChild(stackedbar);
 document.body.appendChild(legend);
+
+const options3 = {
+    radius: 50,
+    stroke_width: 10,
+    circle_color: '#00FF00',
+    circle_background_color: '#DDDDDD',
+    text_color: '#000000'
+};
+
+const values3 = {
+    value_type: '%',
+    value_max: 100,
+    value: 50
+};
+
+
+// Create the progress bar
+const progressCircle =svg_ProgressCircle_s(options3, values3);
+document.body.appendChild(progressCircle);
+
+const options4 = {
+    radius: 50,
+    stroke_width: 10,
+    bar_colors: ['#FF0000', '#00FF00', '#0000FF'],
+    text_color: '#000000'
+};
+
+const values4 = {
+    order: 'asc',
+    labels: ['Red', 'Green', 'Blue'],
+    values: [30, 50, 20]
+};
+
+// Create the progress bar
+const [stackedCircle,legend2] =svg_StackedCircle_s(options4, values4);
+document.body.appendChild(stackedCircle);
+document.body.appendChild(legend2);

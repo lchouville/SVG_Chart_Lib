@@ -32,6 +32,8 @@ My library of SVG Charts
     </text>
 </svg> *without rounded*<br>
 
+---
+
 *Stacked bar 100%:* `svg_stackedbar100_s`<br>
 <svg width="275" height="20">
     <rect width="275" height="10" fill="darkgrey" rx="5" ry="5"></rect>
@@ -63,7 +65,7 @@ My library of SVG Charts
             " fill="#264DE4">
     </path>
 </svg>
-<div class="legend" style="width: 275px; display: flex; flex-flow: wrap; place-content: center space-between; align-items: center;">
+<div class="legend" style="width: auto; display: flex; flex-flow: wrap; place-content: center space-between; align-items: center;">
     <div class="legend-item">
         <span style="display: inline-block; width: 15px; height: 15px; margin-right: 5px; border-radius: 50%; background-color: rgb(247, 223, 30);">
         </span>
@@ -97,3 +99,78 @@ My library of SVG Charts
 </div><br>
 
 ### Circle chart
+
+*Progress Circle:* `svg_ProgressCircle_s`<br>
+<svg width="120" height="120">
+    <circle cx="60" cy="60" r="50" stroke="#DDDDDD" stroke-width="10" fill="none"></circle>
+    <circle cx="60" cy="60" r="50" stroke="#00FF00" stroke-width="10" fill="none" stroke-dasharray="314.1592653589793" stroke-dashoffset="167.55160819145564" transform="rotate(-90 60 60)"></circle>
+    <text x="60" y="60" fill="#00FF00" font-family="sans-serif" font-size="25" dominant-baseline="middle" text-anchor="middle">
+        47%
+    </text>
+</svg> *with %*<br>
+<svg width="120" height="120">
+    <circle cx="60" cy="60" r="50" stroke="#DDDDDD" stroke-width="10" fill="none"></circle>
+    <circle cx="60" cy="60" r="50" stroke="red" stroke-width="10" fill="none" stroke-dasharray="314.1592653589793" stroke-dashoffset="157.07963267948966" transform="rotate(-90 60 60)"></circle>
+    <text x="60" y="60" fill="red" font-family="sans-serif" font-size="25" dominant-baseline="middle" text-anchor="middle">
+        50/100
+    </text>
+</svg> *with value/max*<br>
+
+---
+
+*Stacked Circle 100%:* `svg_StackedCircle_s`<br>
+<svg width="120" height="120">
+    <path d="
+            M 60,60
+            L 60,10
+            A 50,50 0 0,1 107.55282581475768,44.54915028125263
+            Z
+        " fill="#0000FF">
+    </path>
+    <path d="
+            M 60,60
+            L 107.55282581475768,44.54915028125263
+            A 50,50 0 0,1 60,110
+            Z
+        " fill="#FF0000">
+    </path>
+    <path d="
+            M 60,60
+            L 60,110
+            A 50,50 0 0,1 59.99999999999999,10
+            Z
+        " fill="#00FF00">
+    </path>
+</svg>
+
+<div  class="legend" style="display: flex; flex-flow: wrap; place-content: center space-between; align-items: center;">
+    <div class="legend-item">
+        <span style="display: inline-block; width: 15px; height: 15px; margin-right: 5px; border-radius: 50%; background-color: rgb(0, 0, 255);"></span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; font-weight: bold; color: rgb(150, 150, 150);">
+            BLUE 
+        </span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; color: rgb(150, 150, 150);">
+            20%
+        </span>
+    </div>
+    <div class="legend-item">
+        <span style="display: inline-block; width: 15px; height: 15px; margin-right: 5px; border-radius: 50%; background-color: rgb(255, 0, 0);"></span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; font-weight: bold; color: rgb(150, 150, 150);">
+            RED 
+        </span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; color: rgb(150, 150, 150);">
+            30%
+        </span>
+    </div>
+    <div class="legend-item">
+        <span style="display: inline-block; width: 15px; height: 15px; margin-right: 5px; border-radius: 50%; background-color: rgb(0, 255, 0);"></span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; font-weight: bold; color: rgb(150, 150, 150);">
+            GREEN 
+        </span>
+        <span style="display: inline-block; width: auto; height: 15px; margin-right: 10px; color: rgb(150, 150, 150);">
+            50%
+        </span>
+    </div>
+</div><br>
+
+---
