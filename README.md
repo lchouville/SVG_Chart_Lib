@@ -5,7 +5,6 @@ My library of SVG Charts
 
 ## Installation
 
-
 ## All Graphics
 
 ### Bar chart
@@ -32,6 +31,25 @@ My library of SVG Charts
     </text>
 </svg> *without rounded*<br>
 
+```js
+const options = {
+    bar_width: 200,
+    bar_height: 20,
+    rounded_width: 10,
+    bar_color: 'red',
+    bar_background_color: 'lightgray',
+    value_type: '/',
+    text_color:"darkred"
+};
+
+const values = {
+    value: 100,
+    value_max: 400
+};
+
+const progressBar = svg_Progressbar_s(options, values);
+document.body.appendChild(progressBar);
+```
 ---
 
 *Stacked bar 100%:* `svg_stackedbar100_s`<br>
@@ -98,6 +116,28 @@ My library of SVG Charts
     </div>
 </div><br>
 
+```js
+const options = {
+    bar_width: 275,
+    bar_height: 10,
+    rounded_width: 10,
+    bar_colors: ['#264DE4', '#F7DF1E', '#E34F26'],
+    text_color: '#454545',
+};
+
+const values = {
+    value_type: 't%',
+    order: 'desc',
+    labels: ["css","js","html"],
+    values: [10,50,40]
+};
+
+const [stackedbar, legend] = svg_stackedbar100_s(options, values);
+
+document.body.appendChild(stackedbar);
+document.body.appendChild(legend);
+```
+
 ### Circle chart
 
 *Progress Circle:* `svg_ProgressCircle_s`<br>
@@ -116,9 +156,29 @@ My library of SVG Charts
     </text>
 </svg> *with value/max*<br>
 
+```js
+const options = {
+    radius: 50,
+    stroke_width: 10,
+    circle_color: '#00FF00',
+    circle_background_color: '#DDDDDD',
+    text_color: '#000000'
+};
+
+const values = {
+    value_type: '%',
+    value_max: 100,
+    value: 50
+};
+// Create the progress bar
+const progressCircle =svg_ProgressCircle_s(options, values);
+document.body.appendChild(progressCircle);
+```
+
 ---
 
 *Stacked Circle 100%:* `svg_StackedCircle_s`<br>
+
 <svg width="120" height="120">
     <path d="
             M 60,60
@@ -173,4 +233,23 @@ My library of SVG Charts
     </div>
 </div><br>
 
+```js
+const options = {
+    radius: 50,
+    stroke_width: 10,
+    bar_colors: ['#FF0000', '#00FF00', '#0000FF'],
+    text_color: '#000000'
+};
+
+const values = {
+    order: 'asc',
+    labels: ['Red', 'Green', 'Blue'],
+    values: [30, 50, 20]
+};
+
+// Create the progress bar
+const [stackedCircle,legend] =svg_StackedCircle_s(options, values);
+document.body.appendChild(stackedCircle);
+document.body.appendChild(legend);
+```
 ---

@@ -7,70 +7,71 @@ import { lgd_legend_s } from "../legend/standardLegend.js";
  *  @property {number} rounded_width - The rounded width
  *  @property {[string]} bar_colors - The bar main color
  *  @property {string} text_color - The text color
- * @param {object} _values 
  *  @property {[string]} order - The order of values displayed (asc, desc and none)
+ * @param {object} _values 
  *  @property {[string]} labels - The labels
  *  @property {[number]} values - The values of the bar
  * @returns {SVGElement} - The created SVG element and the corresponding legend
  */
 export function svg_stackedbar100_s(_options, _values) {
-    let { bar_width, bar_height,rounded_width, bar_colors,text_color} = _options
-    let { order,labels, values } = _values;
+    let options = {..._options}
+    let values = {..._values}
+
     // Create a new progress bar SVG element
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", bar_width);
-    svg.setAttribute("height", bar_height * 2);
-    if (rounded_width> bar_height/2){
-        rounded_width = bar_height/2;
+    svg.setAttribute("width", options.bar_width);
+    svg.setAttribute("height", options.bar_height * 2);
+    if (options.rounded_width> options.bar_height/2){
+        options.rounded_width = options.bar_height/2;
     }
     // calculate the total value on values
-    let value_max = 0;
+    let totalValue = 0;
     let percentage = [];
     let usedWidth = 0;
 
     // Create the bar background
     const bar_background = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    bar_background.setAttribute("width", bar_width);
-    bar_background.setAttribute("height", bar_height);
+    bar_background.setAttribute("width", options.bar_width);
+    bar_background.setAttribute("height", options.bar_height);
     bar_background.setAttribute("fill", "darkgrey");
-    bar_background.setAttribute("rx", rounded_width); // Set horizontal radius for rounded corners
-    bar_background.setAttribute("ry", rounded_width); // Set vertical radius for rounded corners
+    bar_background.setAttribute("rx", options.rounded_width); // Set horizontal radius for rounded corners
+    bar_background.setAttribute("ry", options.rounded_width); // Set vertical radius for rounded corners
     svg.appendChild(bar_background);
 
 
     // Apply the order to the labels and values
-    if (order === "asc" || order === "desc") {
-        const combined = labels.map((label, index) => ({
+    if (options.order === "asc" || options.order === "desc") {
+        console.log("b: ",values.values,options.bar_colors)
+        const combined = values.labels.map((label, index) => ({
             label,
-            value: values[index],
-            bar_colors: bar_colors[index]
+            value: values.values[index],
+            bar_colors: options.bar_colors[index]
         }));
 
-        combined.sort((a, b) => order === "asc" ? a.value - b.value : b.value - a.value);
+        combined.sort((a, b) => options.order === "asc" ? a.value - b.value : b.value - a.value);
 
-        labels = combined.map(item => item.label);
-        _values.labels = labels
-        values = combined.map(item => item.value);
-        _values.values = values
-        bar_colors = combined.map(item => item.bar_colors);
-        _options.bar_colors = bar_colors
+        values.labels = combined.map(item => item.label);
+        values.values = combined.map(item => item.value);
+        options.bar_colors = combined.map(item => item.bar_colors);
+        
+        console.log("b: ",values.values,options.bar_colors)
     }
 
-    for (const key in values) {
-        value_max += values[key];
+    for (const key in values.values) {
+        totalValue += values.values[key];
     }
 
     // Create bars element
-    for (const key in values) {
+    for (const key in values.values) {
         if (key == 3) {
             break;
         }
         // get the percentage of the value represented
-        percentage[key] = values[key] / value_max;
+        percentage[key] = values.values[key] / totalValue;
         // Size
-        const barWidth = bar_width * percentage[key]-1;
-        const barHeight = bar_height;
-        const roundedWidth = rounded_width;
+        const barWidth = options.bar_width * percentage[key]-1;
+        const barHeight = options.bar_height;
+        const roundedWidth = options.rounded_width;
         let pathData;
 
         if (usedWidth === 0) {
@@ -110,13 +111,13 @@ export function svg_stackedbar100_s(_options, _values) {
         // Create a new path element
         const bar = document.createElementNS("http://www.w3.org/2000/svg", "path");
         bar.setAttribute("d", pathData);
-        bar.setAttribute("fill", bar_colors[key]);
+        bar.setAttribute("fill", options.bar_colors[key]);
 
         svg.appendChild(bar);
         usedWidth += barWidth+1;
 
     }
-    const legend = lgd_legend_s(_options,_values,value_max)
+    const legend = lgd_legend_s(options,values,totalValue)
 
     return [svg,legend];
 }
