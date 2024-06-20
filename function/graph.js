@@ -1,4 +1,3 @@
-import { addDistinctColors } from "./color.js";
 import { orderValue } from "./filter.js";
 
 export function newGraph() {
@@ -36,19 +35,28 @@ export function newGraph() {
         setSvgDim(width,height) {
             options.svg_width = width;
             options.svg_height = height;
+            options.svg_radius = 0;
             return this;
         },
         /**
          * Set the radius to the svg (px) replacing the setSvgDim
          */
         setSvgRadius(radius){
+            options.svg_width = 0;
+            options.svg_height = 0;
             options.svg_radius = radius;
             return this;
         },
+        /**
+         * Set the corner radius of the svg
+         */
         setSvgRoundedWidth(roundedWidth) {
             options.svg_rounded_width = roundedWidth;
             return this;
         },
+        /**
+         * Set global svg colors number depending to the graph
+         */
         setSvgColors(colors) {
             // Check if parameter are an array, otherwise transform them into array format
             if (Array.isArray(colors)) {
@@ -58,6 +66,9 @@ export function newGraph() {
             }
             return this;
         },
+        /**
+         * Set the border of the svg [width,color]
+         */
         setSvgBorder(border) {
             // Check if border are an array and have 2 elements min
             if (Array.isArray(border) && border.length >= 2) {
@@ -67,6 +78,9 @@ export function newGraph() {
             }
             return this;
         },
+        /**
+         * Set the margin to the graph in svg elements)
+         */
         setSvgMargin(margin) {
             // Check if parameter are an array, otherwise transform them into array format
             if (Array.isArray(margin)) {
@@ -77,6 +91,9 @@ export function newGraph() {
             return this;
         },
         // Element Options
+        /**
+         * Set Graph Colors When they not depending of value
+         */
         setGraphColors(colors) {
             // Check if parameter are an array, otherwise transform them into array format
             if (Array.isArray(colors)) {
@@ -86,6 +103,9 @@ export function newGraph() {
             }
             return this;
         },
+        /**
+         * Set the corner radius of the Element
+         */
         setElementRoundedWidth(roundedWidths) {
             // Check if parameter are an array, otherwise transform them into array format
             if (Array.isArray(roundedWidths)) {
@@ -95,29 +115,47 @@ export function newGraph() {
             }
             return this;
         },
+        /**
+         * Set text Color When they not depending of value
+         */
         setTextColor(textColor) {
             options.text_color = textColor;
             return this;
         },
+        /**
+         * Set The Order Of values [asc/desc,""/labels]
+         */
         setOrder(order, orderOn) {
             options.order = order;
             options.orderOn = orderOn;
             return this;
         },
+        /**
+         * Set how the value is formatted '/';'%'
+         */
         setValueType(valueType){
             options.value_type = valueType;
             return this;
         },
         // Values Options
+        /**
+         * Set the maxvalue (for percentage values) default: sum(values)
+         */
         setValueMax(valueMax) {
             values.value_max = valueMax;
             return this;
         },
+        /**
+         * add a new element 
+         */
         addElement(element){
             checkElement(element,options,values);
             values.elements.push(element);
             return this
         },
+        /**
+         * update an existing element with new elements, unchange value can be avoid by '-'
+        */
         updateElement(label,element){
             // get the element with the label = to the parameter
             const index = values.elements.findIndex(element => element.label === label)
@@ -133,6 +171,9 @@ export function newGraph() {
             return this;
         },
         // Svg creation
+        /**
+         * build the graph element, not necessarily on update
+         */
         build() {
             // Check and set default options depending on values
             if (values.value_max==undefined|| Math.max(values.values)>values.value_max) {
