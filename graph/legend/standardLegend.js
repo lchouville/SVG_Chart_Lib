@@ -9,7 +9,8 @@ export function lgd_legend_s(options,values,value_max){
     legend.style.alignContent = "center"; // Use style property to set CSS align-content
     legend.style.alignItems = "center"; // Use style property to set CSS align-items
    
-    for (const key in values.labels) {
+    for (const key in values.elements) {
+        const element = values.elements[key];
         const li = document.createElement("div");
         li.setAttribute("class", "legend-item");
         const dot = document.createElement("span");
@@ -18,7 +19,7 @@ export function lgd_legend_s(options,values,value_max){
         dot.style.height = "15px"; // Use style property to set CSS height
         dot.style.marginRight = "5px"; // Use style property to set CSS margin-right
         dot.style.borderRadius = "50%"; // Use style property to set CSS border-radius
-        dot.style.backgroundColor = options.bar_colors[key]; // Use style property to set CSS background-color
+        dot.style.backgroundColor = element.colors.length!=0 ? element.colors[0]:options.graph_colors[0]; // Use style property to set CSS background-color
         li.appendChild(dot);
 
         const label = document.createElement("span");
@@ -26,9 +27,9 @@ export function lgd_legend_s(options,values,value_max){
         label.style.width = "auto";
         label.style.height = "15px";
         label.style.marginRight = "10px";
-        label.innerHTML = values.labels[key].toUpperCase() + " ";
+        label.innerHTML = element.label.toUpperCase() + " ";
         label.style.fontWeight = "bold";
-        label.style.color = options.text_color; // Set text color
+        label.style.color = element.text_color; // Set text color
         li.appendChild(label);
         
         const val = document.createElement("span");
@@ -36,8 +37,8 @@ export function lgd_legend_s(options,values,value_max){
         val.style.width = "auto";
         val.style.height = "15px";
         val.style.marginRight = "10px";
-        val.innerHTML = (values.values[key] / value_max * 100) + "%";
-        val.style.color = options.text_color; // Set text color
+        val.innerHTML = Math.round((element.value / value_max * 100)*100)/100+ "%";
+        val.style.color = element.text_color; // Set text color
         li.appendChild(val);
         
         legend.appendChild(li);

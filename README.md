@@ -17,38 +17,42 @@ My library of SVG Charts
     </text>
 </svg> *with value/max*<br>
 <svg width="200" height="20">
-    <rect width="200" height="20" fill="lightgray" rx="10" ry="10"></rect>
-    <rect width="150" height="20" fill="green" rx="10" ry="10"></rect>
-    <text x="100" fill="lightgreen" font-family="sans-serif" text-anchor="middle" font-size="17" y="16.8">
+    <rect width="200" height="20" fill="#858585" rx="0" ry="0"></rect>
+    <rect width="150" height="20" fill="Green" rx="0" ry="0"></rect>
+    <text x="100" fill="lightGreen" font-family="sans-serif" text-anchor="middle" font-size="17" y="16.8">
         75%
     </text>
-</svg> *with %*<br>
-<svg width="200" height="20">
-    <rect width="200" height="20" fill="lightgray" rx="0" ry="0"></rect>
-    <rect width="50" height="20" fill="blue" rx="0" ry="0"></rect>
-    <text x="100" fill="darkblue" font-family="sans-serif" text-anchor="middle" font-size="17" y="16.8">
-        25%
-    </text>
-</svg> *without rounded*<br>
+</svg> *with % not rounded*<br>
 
 ```js
-const options = {
-    bar_width: 200,
-    bar_height: 20,
-    rounded_width: 10,
-    bar_color: 'red',
-    bar_background_color: 'lightgray',
-    value_type: '/',
-    text_color:"darkred"
-};
-
-const values = {
-    value: 100,
-    value_max: 400
-};
-
-const progressBar = svg_Progressbar_s(options, values);
-document.body.appendChild(progressBar);
+const graph = newGraph()
+    // Svg Options
+   .setSvgWidth(200)            // Bar Width
+   .setSvgHeight(20)            // Bar Height
+   .setSvgColors("lightgrey")   // Background color
+   // Element Options
+   .setElementRoundedWidth(10)  // bar rounded width (max:bar_height/2)
+   .setElementColors("red")     // Bar color
+   .setTextColors("darkred")    // Text color
+   .setValueType('/')           // Value type
+   // Value Options
+   .setValueMax(400)            // Value max
+   .setValues(100)              // Value
+   // Build the graph
+   .build();
+const progressBar_s_1 = svg_Progressbar_s(graph);
+document.body.appendChild(progressBar_s_1);
+// update the graph
+graph.update
+    .setSvgColors("#858585")
+    .setElementRoundedWidth(0)
+    .setElementColors("Green")
+    .setTextColors("lightGreen")
+    .setValueType('%')   
+    .setValueMax(100)  
+    .setValues(75);
+const progressBar_s_2 = svg_Progressbar_s(graph);
+document.body.appendChild(progressBar_s_2);
 ```
 ---
 

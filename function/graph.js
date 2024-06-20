@@ -1,0 +1,176 @@
+import { addDistinctColors } from "./color.js";
+import { orderValue } from "./filter.js";
+
+export function newGraph() {
+    // Create options and values objects with default settings
+    const options = {
+        // Svg Options
+        svg_width: 200,
+        svg_height: 150,
+        svg_radius: 50,
+        svg_rounded_width: 0,
+        svg_colors: ["none"],
+        svg_border: [0, "none"],
+        svg_margin: [5,5,10,25],
+        // Element Options
+        graph_colors: ["red", "blue", "green"],
+        element_rounded_width: [0, 0, 0, 0],
+        text_color: "black",
+        order: "none",
+        orderOn:"values",
+        value_type:'',
+    };
+
+    const values = {
+        labels: [""],
+        values: [0],
+        value_max: undefined,
+        elements:[]
+    };
+
+    const builder = {
+        // Svg Options
+        /**
+         * Set the svg width and height (px)
+         */
+        setSvgDim(width,height) {
+            options.svg_width = width;
+            options.svg_height = height;
+            return this;
+        },
+        /**
+         * Set the radius to the svg (px) replacing the setSvgDim
+         */
+        setSvgRadius(radius){
+            options.svg_radius = radius;
+            return this;
+        },
+        setSvgRoundedWidth(roundedWidth) {
+            options.svg_rounded_width = roundedWidth;
+            return this;
+        },
+        setSvgColors(colors) {
+            // Check if parameter are an array, otherwise transform them into array format
+            if (Array.isArray(colors)) {
+                options.svg_colors = colors;
+            } else {
+                options.svg_colors = [colors];
+            }
+            return this;
+        },
+        setSvgBorder(border) {
+            // Check if border are an array and have 2 elements min
+            if (Array.isArray(border) && border.length >= 2) {
+                options.svg_border = border;
+            } else {
+                options.svg_border = [0, "none"];
+            }
+            return this;
+        },
+        setSvgMargin(margin) {
+            // Check if parameter are an array, otherwise transform them into array format
+            if (Array.isArray(margin)) {
+                options.svg_margin = margin;
+            } else {
+                options.svg_margin = [margin];
+            }
+            return this;
+        },
+        // Element Options
+        setGraphColors(colors) {
+            // Check if parameter are an array, otherwise transform them into array format
+            if (Array.isArray(colors)) {
+                options.graph_colors = colors;
+            } else {
+                options.graph_colors = [colors];
+            }
+            return this;
+        },
+        setElementRoundedWidth(roundedWidths) {
+            // Check if parameter are an array, otherwise transform them into array format
+            if (Array.isArray(roundedWidths)) {
+                options.element_rounded_width = roundedWidths;
+            } else {
+                options.element_rounded_width = [roundedWidths];
+            }
+            return this;
+        },
+        setTextColor(textColor) {
+            options.text_color = textColor;
+            return this;
+        },
+        setOrder(order, orderOn) {
+            options.order = order;
+            options.orderOn = orderOn;
+            return this;
+        },
+        setValueType(valueType){
+            options.value_type = valueType;
+            return this;
+        },
+        // Values Options
+        setValueMax(valueMax) {
+            values.value_max = valueMax;
+            return this;
+        },
+        addElement(element){
+            checkElement(element,options,values);
+            values.elements.push(element);
+            return this
+        },
+        updateElement(label,element){
+            // get the element with the label = to the parameter
+            const index = values.elements.findIndex(element => element.label === label)
+            // if the element is found, update it
+            if (index!== -1) {
+                values.elements[index].label = element.label!="-"? element.label:values.elements[index].label;
+                values.elements[index].value = element.value !="-"? element.value:values.elements[index].value;
+                values.elements[index].colors = element.colors[0]!="-"? element.colors:values.elements[index].colors;
+                values.elements[index].text_color = element.text_color!="-"? element.text_color:values.elements[index].text_color;
+            } else {
+                values.elements.push(element);
+            }
+            return this;
+        },
+        // Svg creation
+        build() {
+            // Check and set default options depending on values
+            if (values.value_max==undefined|| Math.max(values.values)>values.value_max) {
+                values.value_max = 0;
+                for (const key in values.values) {
+                    values.value_max+=values.values[key]
+                }
+            }
+            orderValue(options, values)
+            // options.graph_colors = addDistinctColors(values.values.length,options.graph_colors)
+            return {
+                options,
+                values,
+                update: builder
+            };
+        }
+    };
+
+    return builder;
+}
+/**
+ * Creates a new Element object
+ * @param {string} Label The label of this element
+ * @param {number} value the value of this element
+ * @param {string} colors the colors of this element (can have multiple colors on some graphs)
+ * @param {string} text_color the text color of this element
+ */
+export function NewElement(Label,value,colors,text_color) {
+    const element = {
+        label:Label,
+        value:value,
+        colors:colors,
+        text_color:text_color
+    }
+    element.colors = Array.isArray(colors) ? colors: [colors]
+    return element;
+}
+function checkElement(element,options,values){
+    element.text_color = element.text_color !== undefined ? element.text_color : options.text_color
+    element.text_color = element.text_color !== "" ? element.text_color : options.text_color
+}
