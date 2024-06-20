@@ -1,7 +1,7 @@
 {
     "name": "SVG_Chart_Lib",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "function/graph.js",
     "repository": {
       "type": "git",
       "url": "git+https://github.com/lchouville/SVG_Chart_Lib.git"
