@@ -2,19 +2,11 @@
     "name": "SVG_Chart_Lib",
     "version": "1.0.0",
     "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
     "repository": {
       "type": "git",
       "url": "git+https://github.com/lchouville/SVG_Chart_Lib.git"
     },
-    "keywords": [],
     "author": "",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/lchouville/SVG_Chart_Lib/issues"
-    },
-    "homepage": "https://github.com/lchouville/SVG_Chart_Lib#readme"
+    "license": "MIT"
   }
   
