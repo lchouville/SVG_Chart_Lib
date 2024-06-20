@@ -1,5 +1,5 @@
 import { orderValue } from "../../function/filter.js";
-import { lgd_legend_s } from "../legend/standardLegend.js";
+import { lgd_legend_s } from "../../graph/legend/standardLegend.js";
 
 /** Circular Stacked Progress Bar
  * @param {object} _graph Object created from new graph to set properties
