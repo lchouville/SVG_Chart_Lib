@@ -1,4 +1,4 @@
-import { orderValue } from "./filter.js";
+import { orderValue } from "../function/filter.js";
 
 export function newGraph() {
     // Create options and values objects with default settings
