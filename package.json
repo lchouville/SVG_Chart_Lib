@@ -1,12 +1,19 @@
 {
     "name": "SVG_Chart_Lib",
     "version": "1.0.0",
-    "main": "main.js",
+    "main": "index.js",
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/lchouville/SVG_Chart_Lib.git"
+        "type": "git",
+        "url": "git+https://github.com/lchouville/SVG_Chart_Lib.git"
+    },
+    "scripts": {
+      "build": "babel src --out-dir lib"
     },
     "author": "",
-    "license": "MIT"
-  }
-  
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.24.7",
+        "@babel/core": "^7.24.7",
+        "@babel/preset-env": "^7.24.7"
+    }
+}

@@ -1,0 +1,38 @@
+name: Release the library
+
+on:
+    push:
+        branches:
+            - release
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    
+        steps:
+        - name: checkout-release
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+                node-version: '14'
+        
+        - name: npm install
+          run: npm install
+        
+        - name: npm run build
+          run: npm run build
+
+        - name: Pull lib directory
+          run: |
+            git fetch origin release:release
+            git checkout 
+            cp -R lib/* .
+            git add .
+            git commit -m "Release"
+            git push origin main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

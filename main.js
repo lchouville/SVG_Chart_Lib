@@ -1,11 +1,11 @@
 // Import the svg_ProgressBar function
-import { NewElement, newGraph } from './function/graph.js';
-import { svg_ColumnChart_s } from './graph/bar/columnChart.js';
-import { svg_Progressbar_s } from './graph/bar/progressBar.js'; 
-import { svg_stackedbar100_s } from './graph/bar/stackedBar.js';
-import { svg_ProgressCircle_s } from './graph/circle/progressCircle.js';
-import { svg_PieChart_s } from './graph/circle/pieChart.js';
-import { svg_radarChart_s } from './graph/circle/radarChart.js';
+import { NewElement, newGraph } from './src/function/graph.js';
+import { svg_ColumnChart_s } from './src/graph/bar/columnChart.js';
+import { svg_Progressbar_s } from './src/graph/bar/progressBar.js'; 
+import { svg_stackedbar100_s } from './src/graph/bar/stackedBar.js';
+import { svg_ProgressCircle_s } from './src/graph/circle/progressCircle.js';
+import { svg_PieChart_s } from './src/graph/circle/pieChart.js';
+import { svg_radarChart_s } from './src/graph/circle/radarChart.js';
 
 // Progress Chart
 const graph = newGraph()

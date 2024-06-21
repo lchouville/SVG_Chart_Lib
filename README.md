@@ -5,6 +5,11 @@ My library of SVG Charts
 
 ## Installation
 
+install on your repository the package using the following command:
+```cmd
+    npm install git+https://github.com/lchouville/SVG_Chart_Lib.git
+```
+
 ## All Graphics
 
 ### Bar chart
