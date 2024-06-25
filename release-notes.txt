@@ -1,0 +1,9 @@
+// 06/24/2024 - Version 0.1 { First release }
+Adding:
+    - <svg> Progress bar
+    - <svg> BarChart graph
+    - <svg> Progress circle
+    - <svg> Stacked bar 100% 
+    - <svg> Columns chart
+    - <svg> Pie chart
+    - <svg> Radar chart
