@@ -15,16 +15,14 @@ git checkout release
 # Pull the latest changes from the release branch
 git pull origin release
 
-# Copy the latest README.md, .gitignore, and release-notes.txt from develop
+# Copy the latest README.md, and release-notes.txt from develop
 git checkout develop -- README.md
-git checkout develop -- .gitignore
 git checkout develop -- release-notes.txt
 
 # Add the built libraries and specific files to the release branch
 git add lib/*
 git add README.md
 git add release-notes.txt
-git add .gitignore
 
 # Commit the changes
 git commit -m "Release version"
