@@ -13,3 +13,5 @@ git checkout release -- release-notes.txt
 git add lib/*
 git add README.md
 git add release-notes.txt
+
+git commit -m " Release - Version v."
