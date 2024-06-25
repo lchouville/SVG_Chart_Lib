@@ -1,16 +1,3 @@
-#!/bin/bash
-
-# Exit immediately if a command exits with a non-zero status
-set -e
-
-# Define branch names
-RELEASE_BRANCH="release"
-MAIN_BRANCH="main"
-
-# Set up git user for the merge operation (useful for CI environments)
-git config --global user.name "github-actions[bot]"
-git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
 # Fetch the latest branches from the remote
 git fetch origin
 
@@ -22,23 +9,12 @@ git pull origin $MAIN_BRANCH
 git checkout $RELEASE_BRANCH
 git pull origin $RELEASE_BRANCH
 
-# Merge release into main
+# Copy the necessary files and directories from release to main
 git checkout $MAIN_BRANCH
-git merge $RELEASE_BRANCH --no-ff -m "Merge branch 'release' into '$MAIN_BRANCH'"
-
-# Copy the necessary files and directories
-cp -R lib/* .
-cp README.md .
-cp release-notes.txt .
-cp .gitignore .
+git checkout $RELEASE_BRANCH -- lib README.md release-notes.txt
 
 # Add the copied files to the staging area
-git add lib/* README.md release-notes.txt .gitignore
+git add lib/* README.md release-notes.txt
 
 # Commit the changes
 git commit -m "Update lib directory and documentation from release branch"
-
-# Push the changes to the main branch
-git push origin $MAIN_BRANCH
-
-echo "Merge from $RELEASE_BRANCH to $MAIN_BRANCH completed successfully."
