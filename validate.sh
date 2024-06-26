@@ -1,20 +1,18 @@
-# Fetch the latest branches from the remote
-git fetch origin
+# Checkout the main branch
+git checkout main
 
-# Checkout the main branch and pull the latest changes
-git checkout $MAIN_BRANCH
-git pull origin $MAIN_BRANCH
+# Pull the latest changes from the main branch
+git pull origin main
 
-# Checkout the release branch and pull the latest changes
-git checkout $RELEASE_BRANCH
-git pull origin $RELEASE_BRANCH
+# Copy the latest README.md, and release-notes.txt from release
+git checkout release -- README.md
+git checkout release -- release-notes.txt
+git checkout release -- lib/*
 
-# Copy the necessary files and directories from release to main
-git checkout $MAIN_BRANCH
-git checkout $RELEASE_BRANCH -- lib README.md release-notes.txt
-
-# Add the copied files to the staging area
-git add lib/* README.md release-notes.txt
+# Add the built libraries and specific files to the main branch
+git add lib/*
+git add README.md
+git add release-notes.txt
 
 # Commit the changes
-git commit -m "Update lib directory and documentation from release branch"
+git commit -m "Release version "
