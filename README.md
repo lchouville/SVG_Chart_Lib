@@ -10,7 +10,7 @@ install on your repository the package using the following command:
     npm install git+https://github.com/lchouville/SVG_Chart_Lib.git
 ```
 
-## All Graphics
+## Exemple
 
 ### Bar chart
 *Simple Progress Bar:* `svg_progressbar_s`<br>
